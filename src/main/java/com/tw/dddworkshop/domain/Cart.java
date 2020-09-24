@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Cart {
+public class Cart implements Entity<Cart> {
 
     private final UUID id;
     private List<Item> items;
@@ -58,5 +58,10 @@ public class Cart {
                 "items=" + items +
                 ", events=" + events +
                 '}';
+    }
+
+    @Override
+    public boolean sameIdentityAs(Cart other) {
+        return other != null && id.equals(other.id);
     }
 }

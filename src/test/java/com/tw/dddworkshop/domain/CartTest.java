@@ -112,7 +112,7 @@ public class CartTest {
         cart1.addItem(item);
         cart2.addItem(item);
 
-        assertFalse(cart1.equals(cart2));
+        assertFalse(cart1.sameIdentityAs(cart2));
     }
 
 }
