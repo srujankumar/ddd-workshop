@@ -17,4 +17,17 @@ public class CartTest {
         assertThat(cart.toString(), containsString("IPad Pro"));
     }
 
+    @Test
+    public void shouldAddSecondProductToTheCart() {
+        Cart cart = new Cart();
+        Product product1 = new Product("IPad Pro");
+        cart.addProduct(product1);
+        Product product2 = new Product("Hero Ink Pen");
+
+        cart.addProduct(product2);
+
+        assertThat(cart.toString(), containsString("IPad Pro"));
+        assertThat(cart.toString(), containsString("Hero Ink Pen"));
+    }
+
 }
