@@ -5,20 +5,20 @@ import java.util.List;
 
 public class Cart {
 
-    private List<Product> products;
+    private List<Item> items;
 
     public Cart() {
-        this.products = new ArrayList<>();
+        this.items = new ArrayList<>();
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
+    public void addItem(Item item) {
+        items.add(item);
     }
 
     @Override
     public String toString() {
         return "Cart{" +
-                "products=" + products +
+                "items=" + items +
                 '}';
     }
 }
