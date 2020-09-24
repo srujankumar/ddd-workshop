@@ -15,10 +15,15 @@ public class Cart {
         items.add(item);
     }
 
+    public void removeItem(Item item) {
+        items.remove(item);
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
                 "items=" + items +
                 '}';
     }
+
 }
