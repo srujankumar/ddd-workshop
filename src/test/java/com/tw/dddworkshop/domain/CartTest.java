@@ -5,6 +5,7 @@ import com.tw.dddworkshop.domain.events.ItemRemovedFromCartEvent;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class CartTest {
@@ -99,6 +100,19 @@ public class CartTest {
         assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getItem().getQuantity(), 2);
         assertTrue(( (ItemRemovedFromCartEvent) cart.getEvents().get(1)).getItem().getProduct().toString().contains("GM Cricket Bat"));
         assertEquals(( (ItemRemovedFromCartEvent) cart.getEvents().get(1)).getItem().getQuantity(), 2);
+    }
+
+    @Test
+    public void shouldDifferentiateCartsOfDifferentUsers() {
+        Cart cart1 = new Cart();
+        Cart cart2 = new Cart();
+        Product product = new Product("GM Cricket Bat");
+        Item item = new Item(product, 2);
+
+        cart1.addItem(item);
+        cart2.addItem(item);
+
+        assertFalse(cart1.equals(cart2));
     }
 
 }
