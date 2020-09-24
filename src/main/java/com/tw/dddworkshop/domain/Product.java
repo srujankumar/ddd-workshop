@@ -2,7 +2,7 @@ package com.tw.dddworkshop.domain;
 
 import java.util.Objects;
 
-public class Product {
+public class Product implements ValueObject<Product> {
 
     private String name;
     private Price price;
@@ -40,5 +40,12 @@ public class Product {
                 "name='" + name + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean sameValueAs(Product other) {
+        if (other == null) return false;
+        return name.equals(other.name) &&
+                price.equals(other.price);
     }
 }
