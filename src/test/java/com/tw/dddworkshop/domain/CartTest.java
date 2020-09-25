@@ -1,5 +1,6 @@
 package com.tw.dddworkshop.domain;
 
+import com.tw.dddworkshop.domain.events.CartCheckedOutEvent;
 import com.tw.dddworkshop.domain.events.ItemAddedToCartEvent;
 import com.tw.dddworkshop.domain.events.ItemRemovedFromCartEvent;
 import org.junit.Test;
@@ -96,8 +97,6 @@ public class CartTest {
 
         cart.removeItem(item);
 
-        System.out.println(cart);
-
         assertEquals(cart.getItems().size(), 0);
         assertEquals(cart.getEvents().size(), 2);
         assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getItem().getProduct().getName(), "GM Cricket Bat");
@@ -117,6 +116,23 @@ public class CartTest {
         cart2.addItem(item);
 
         assertFalse(cart1.sameIdentityAs(cart2));
+    }
+
+    @Test
+    public void shouldAddCartCheckedOutEventWithCurrentItemsWhenCartIsCheckedOut() {
+        Cart cart = new Cart();
+        Product product = new Product("GM Cricket Bat", new Price(new BigDecimal(100), Currency.getInstance("INR")));
+        Item item = new Item(product, 2);
+        cart.addItem(item);
+
+        cart.checkOut();
+
+        assertTrue(cart.getStatus().equals(Cart.Status.CHECKED_OUT));
+        assertEquals(cart.getItems().size(), 1);
+        assertEquals(cart.getEvents().size(), 2);
+        assertEquals(( (CartCheckedOutEvent) cart.getEvents().get(1)).getItems().size(), 1);
+        assertEquals(( (CartCheckedOutEvent) cart.getEvents().get(1)).getItems().get(0).getProduct().getName(), "GM Cricket Bat");
+        assertEquals(( (CartCheckedOutEvent) cart.getEvents().get(1)).getItems().get(0).getQuantity(), 2);
     }
 
 }

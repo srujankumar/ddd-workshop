@@ -1,5 +1,6 @@
 package com.tw.dddworkshop.domain;
 
+import com.tw.dddworkshop.domain.events.CartCheckedOutEvent;
 import com.tw.dddworkshop.domain.events.DomainEvent;
 import com.tw.dddworkshop.domain.events.ItemAddedToCartEvent;
 import com.tw.dddworkshop.domain.events.ItemRemovedFromCartEvent;
@@ -14,11 +15,13 @@ public class Cart implements Entity<Cart> {
     private final UUID id;
     private List<Item> items;
     private List<DomainEvent> events;
+    private Status status;
 
     public Cart() {
         this.id = UUID.randomUUID();
         this.items = new ArrayList<>();
         this.events = new ArrayList<>();
+        this.status = Status.AVAILABLE;
     }
 
     public void addItem(Item item) {
@@ -31,12 +34,21 @@ public class Cart implements Entity<Cart> {
         events.add(new ItemRemovedFromCartEvent(item));
     }
 
+    public void checkOut() {
+        this.status = Status.CHECKED_OUT;
+        events.add(new CartCheckedOutEvent(items));
+    }
+
     public List<Item> getItems() {
         return items;
     }
 
     public List<DomainEvent> getEvents() {
         return events;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     @Override
@@ -53,15 +65,12 @@ public class Cart implements Entity<Cart> {
     }
 
     @Override
-    public String toString() {
-        return "Cart{" +
-                "items=" + items +
-                ", events=" + events +
-                '}';
-    }
-
-    @Override
     public boolean sameIdentityAs(Cart other) {
         return other != null && id.equals(other.id);
+    }
+
+    public enum Status {
+        CHECKED_OUT,
+        AVAILABLE
     }
 }
