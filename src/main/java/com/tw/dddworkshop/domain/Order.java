@@ -15,4 +15,8 @@ public class Order {
     public List<Product> getProducts() {
         return products;
     }
+
+    public ShippingInformation getShippingInformation() {
+        return shippingInformation;
+    }
 }
