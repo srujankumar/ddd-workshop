@@ -1,16 +1,28 @@
 package com.tw.dddworkshop.domain.events;
 
-import com.tw.dddworkshop.domain.Item;
+import com.tw.dddworkshop.domain.Price;
 
 public class ItemAddedToCartEvent implements DomainEvent {
 
-    private Item item;
+    final private String productName;
+    final private Price price;
+    final private int quantity;
 
-    public ItemAddedToCartEvent(Item item) {
-        this.item = item;
+    public ItemAddedToCartEvent(String productName, Price price, int quantity) {
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
     }
 
-    public Item getItem() {
-        return item;
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Price getPrice() {
+        return price;
     }
 }

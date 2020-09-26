@@ -1,16 +1,14 @@
 package com.tw.dddworkshop.domain.events;
 
-import com.tw.dddworkshop.domain.Item;
-
 public class ItemRemovedFromCartEvent implements DomainEvent {
 
-    private Item item;
+    final private String productName;
 
-    public ItemRemovedFromCartEvent(Item item) {
-        this.item = item;
+    public ItemRemovedFromCartEvent(String productName) {
+        this.productName = productName;
     }
 
-    public Item getItem() {
-        return item;
+    public String getProductName() {
+        return productName;
     }
 }

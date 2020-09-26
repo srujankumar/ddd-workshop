@@ -84,8 +84,8 @@ public class CartTest {
         assertEquals(cart.getItems().get(0).getProduct().getName(), "GM Cricket Bat");
         assertEquals(cart.getItems().get(0).getQuantity(), 2);
         assertEquals(cart.getEvents().size(), 1);
-        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getItem().getProduct().getName(), "GM Cricket Bat");
-        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getItem().getQuantity(), 2);
+        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getProductName(), "GM Cricket Bat");
+        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getQuantity(), 2);
     }
 
     @Test
@@ -99,10 +99,9 @@ public class CartTest {
 
         assertEquals(cart.getItems().size(), 0);
         assertEquals(cart.getEvents().size(), 2);
-        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getItem().getProduct().getName(), "GM Cricket Bat");
-        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getItem().getQuantity(), 2);
-        assertEquals(( (ItemRemovedFromCartEvent) cart.getEvents().get(1)).getItem().getProduct().getName(), "GM Cricket Bat");
-        assertEquals(( (ItemRemovedFromCartEvent) cart.getEvents().get(1)).getItem().getQuantity(), 2);
+        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getProductName(), "GM Cricket Bat");
+        assertEquals(( (ItemAddedToCartEvent) cart.getEvents().get(0)).getQuantity(), 2);
+        assertEquals(( (ItemRemovedFromCartEvent) cart.getEvents().get(1)).getProductName(), "GM Cricket Bat");
     }
 
     @Test
